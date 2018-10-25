@@ -22,7 +22,7 @@ import java.util.TreeSet;
  * 类工具
  *
  * @author mty
- * @date 2013-6-10下午8:00:46
+ * @since 2013-6-10下午8:00:46
  */
 public class ClassUtil {
     private static final Map<Class, ClassFactory> CLASS_FACTORIES = new HashMap();

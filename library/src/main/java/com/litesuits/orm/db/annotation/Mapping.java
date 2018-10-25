@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
  * 
  * @author mty
  * @author GeekSoledad(www.githang.com)
- * @date 2013-6-8上午1:13:18
+ * @since 2013-6-8上午1:13:18
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)

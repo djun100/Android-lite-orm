@@ -8,7 +8,7 @@ import com.litesuits.orm.log.OrmLog;
  * 辅助查询
  *
  * @author MaTianyu
- * @date 2013-6-15下午11:11:02
+ * @since 2013-6-15下午11:11:02
  */
 public class Querier {
     private static final String TAG = Querier.class.getSimpleName();

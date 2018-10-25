@@ -20,7 +20,7 @@ import java.util.*;
  * 可查阅 <a href="http://www.sqlite.org/lang.html">SQLite操作指南</a>
  *
  * @author MaTianyu
- * @date 2015-03-13
+ * @since 2015-03-13
  */
 public final class CascadeSQLiteImpl extends LiteOrm {
 

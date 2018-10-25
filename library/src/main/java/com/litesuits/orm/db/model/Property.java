@@ -9,7 +9,7 @@ import java.lang.reflect.Field;
  * 属性
  *
  * @author mty
- * @date 2013-6-9上午1:09:17
+ * @since 2013-6-9上午1:09:17
  */
 public class Property implements Serializable {
 

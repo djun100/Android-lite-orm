@@ -4,7 +4,7 @@ import com.litesuits.orm.db.TableManager;
 
 /**
  * @author MaTianyu
- * @date 2015-03-18
+ * @since 2015-03-18
  */
 public class WhereBuilder {
     public static final String NOTHING = "";
@@ -122,14 +122,14 @@ public class WhereBuilder {
     }
 
     /**
-     * build as " column > ? "
+     * build as " column &gt; ? "
      */
     public WhereBuilder greaterThan(String column, Object value) {
         return append(null, column + GREATER_THAN_HOLDER, value);
     }
 
     /**
-     * build as " column < ? "
+     * build as " column &lt; ? "
      */
     public WhereBuilder lessThan(String column, Object value) {
         return append(null, column + LESS_THAN_HOLDER, value);

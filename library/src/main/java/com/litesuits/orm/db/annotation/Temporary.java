@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /**
  * 临时性
  * @author mty
- * @date 2013-6-2下午8:04:46
+ * @since 2013-6-2下午8:04:46
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

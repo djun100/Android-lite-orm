@@ -7,7 +7,7 @@ import com.litesuits.orm.log.OrmLog;
  * 辅助事务
  *
  * @author mty
- * @date 2013-6-15下午11:09:15
+ * @since 2013-6-15下午11:09:15
  */
 public class Transaction {
     private static final String TAG = Transaction.class.getSimpleName();

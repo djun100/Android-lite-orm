@@ -2,7 +2,7 @@ package com.litesuits.orm.db.enums;
 
 /**
  * @author MaTianyu
- * @date 2014-08-16
+ * @since 2014-08-16
  */
 public enum AssignType {
     /**

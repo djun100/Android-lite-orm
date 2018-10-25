@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
  * 为属性命名“列名”，如果没有设置，将以属性名字命名它在表中的“列名”；
  * 
  * @author mty
- * @date 2013-6-2下午8:01:40
+ * @since 2013-6-2下午8:01:40
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)

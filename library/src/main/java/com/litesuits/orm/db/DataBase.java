@@ -33,7 +33,7 @@ import java.util.List;
  * data base operation interface
  *
  * @author mty
- * @date 2013-6-2上午2:37:56
+ * @since 2013-6-2上午2:37:56
  */
 public interface DataBase {
 
@@ -160,7 +160,7 @@ public interface DataBase {
     <T> int deleteAll(Class<T> claxx);
 
     /**
-     * <b>start must >=0 and smaller than end</b>
+     * <b>start must &gt;=0 and smaller than end</b>
      * <p>delete from start to the end, <b>[start,end].</b>
      * <p>set end={@link Integer#MAX_VALUE} will delete all rows from the start
      *
@@ -304,9 +304,9 @@ public interface DataBase {
 
     /**
      * if database in sdcard , you will need this  in manifest:
-     * <p/>
-     * <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
-     * <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+     * <p>
+     * &lt;uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/&gt;
+     * &lt;uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/&gt;
      * Equivalent to {@link SQLiteDatabase#openDatabase(String, android.database.sqlite.SQLiteDatabase.CursorFactory, int)}.
      */
     SQLiteDatabase openOrCreateDatabase(String path, SQLiteDatabase.CursorFactory factory);
@@ -315,7 +315,7 @@ public interface DataBase {
 
     /**
      * if database in sdcard , you will need this  in manifest:
-     * <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+     * &lt;uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/&gt;
      *
      * @return true if delete successfully.
      */

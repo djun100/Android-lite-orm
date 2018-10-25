@@ -1,7 +1,7 @@
 package com.litesuits.orm.db.model;
 
 /**
- * @date 2014-08-07
+ * @since 2014-08-07
  */
 
 public enum ConflictAlgorithm {

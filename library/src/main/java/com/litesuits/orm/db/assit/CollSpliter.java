@@ -7,14 +7,14 @@ import java.util.Collection;
  * 辅助事务
  *
  * @author mty
- * @date 2013-6-15下午11:09:15
+ * @since 2013-6-15下午11:09:15
  */
 public class CollSpliter {
 
     /**
      * 将 collection 拆分成 N 组ArrayList，每组 perSize 个元素，最后一组元素数量未知。
      *
-     * {@link Spliter#oneSplit(ArrayList)}将被调用N次，N >= 1.
+     * {@link Spliter#oneSplit(ArrayList)}将被调用N次，N &gt;= 1.
      *
      * @return sum of {@link Spliter#oneSplit(ArrayList)}
      */

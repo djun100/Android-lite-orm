@@ -25,7 +25,7 @@ import java.util.*;
  * sql语句构造与执行
  *
  * @author mty
- * @date 2013-6-14下午7:48:34
+ * @since 2013-6-14下午7:48:34
  */
 public class SQLStatement implements Serializable {
     private static final long serialVersionUID = -3790876762607683712L;

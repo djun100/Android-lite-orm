@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
  * 查询构建
  *
  * @author mty
- * @date 2013-6-14下午3:47:16
+ * @since 2013-6-14下午3:47:16
  */
 public class QueryBuilder<T> {
     private static final Pattern limitPattern = Pattern.compile("\\s*\\d+\\s*(,\\s*\\d+\\s*)?");
@@ -149,7 +149,7 @@ public class QueryBuilder<T> {
     }
 
     /**
-     * build as where+" column > ? "
+     * build as where+" column &gt; ? "
      */
     public QueryBuilder<T> whereGreaterThan(String column, Object value) {
         whereBuilder.greaterThan(column, value);
@@ -157,7 +157,7 @@ public class QueryBuilder<T> {
     }
 
     /**
-     * build as where+" column < ? "
+     * build as where+" column &lt; ? "
      */
     public QueryBuilder<T> whereLessThan(String column, Object value) {
         whereBuilder.lessThan(column, value);

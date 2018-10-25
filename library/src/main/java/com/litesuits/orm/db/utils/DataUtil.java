@@ -21,7 +21,7 @@ import java.util.List;
  * 类型描述摘自sqlite官网 http://sqlite.org/datatype3.html
  *
  * @author mty
- * @date 2013-6-10下午5:28:10
+ * @since 2013-6-10下午5:28:10
  */
 public class DataUtil implements Serializable {
     public static final String TAG = DataUtil.class.getSimpleName();
@@ -121,7 +121,6 @@ public class DataUtil implements Serializable {
      * <li>{@link #FIELD_TYPE_DATE}</li>
      * <li>{@link #FIELD_TYPE_SERIALIZABLE}</li>
      * </ul>
-     * </p>
      */
     public static int getType(Object obj) {
         if (obj == null) {

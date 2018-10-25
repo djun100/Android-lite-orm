@@ -41,7 +41,7 @@ import java.util.*;
  * 可查阅 <a href="http://www.sqlite.org/lang.html">SQLite操作指南</a>
  *
  * @author mty
- * @date 2013-6-2下午2:32:56
+ * @since 2013-6-2下午2:32:56
  */
 public abstract class LiteOrm extends SQLiteClosable implements DataBase {
 

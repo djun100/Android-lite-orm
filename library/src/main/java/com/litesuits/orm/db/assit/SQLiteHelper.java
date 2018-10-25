@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  * SQLite辅助类
  * 
  * @author mty
- * @date 2013-6-2下午4:42:47
+ * @since 2013-6-2下午4:42:47
  */
 public class SQLiteHelper extends SQLiteOpenHelper {
 

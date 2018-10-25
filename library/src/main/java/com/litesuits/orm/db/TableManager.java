@@ -43,7 +43,7 @@ import java.util.List;
  * 表管理
  *
  * @author MaTianyu
- * @date 2013-6-16上午12:27:32
+ * @since 2013-6-16上午12:27:32
  */
 public final class TableManager {
     private static final String TAG = TableManager.class.getSimpleName();

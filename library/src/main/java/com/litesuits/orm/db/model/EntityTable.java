@@ -9,7 +9,7 @@ import java.util.LinkedHashMap;
  * 实体的表结构
  *
  * @author mty
- * @date 2013-6-9上午1:10:48
+ * @since 2013-6-9上午1:10:48
  */
 public class EntityTable implements Serializable {
     private static final long serialVersionUID = 421721084878061123L;

@@ -16,7 +16,7 @@ import java.util.HashMap;
  * );
  *
  * @author mty
- * @date 2013-6-2下午11:17:40
+ * @since 2013-6-2下午11:17:40
  */
 public class SQLiteTable implements Serializable {
     private static final long serialVersionUID = 6706520684759700566L;

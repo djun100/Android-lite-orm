@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
  * 2.主键值系统定义，适用于没有唯一ID的对象，将使用递增的数字作为值賦予它。
  * 
  * @author mty
- * @date 2013-6-2下午7:01:47
+ * @since 2013-6-2下午7:01:47
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)

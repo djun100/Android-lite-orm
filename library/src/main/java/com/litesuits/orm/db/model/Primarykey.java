@@ -9,7 +9,7 @@ import java.lang.reflect.Field;
  * 主键
  *
  * @author mty
- * @date 2013-6-9上午1:09:33
+ * @since 2013-6-9上午1:09:33
  */
 public class Primarykey extends Property {
     private static final long serialVersionUID = 2304252505493855513L;
