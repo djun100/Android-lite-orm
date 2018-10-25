@@ -12,7 +12,6 @@ import com.litesuits.orm.db.utils.ClassUtil;
 import com.litesuits.orm.db.utils.DataUtil;
 import com.litesuits.orm.db.utils.FieldUtil;
 
-import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.*;
 
@@ -380,9 +379,9 @@ public final class CascadeSQLiteImpl extends LiteOrm {
             if (table1.mappingList != null) {
                 for (MapProperty mp : table1.mappingList) {
                     if (mp.isToOne()) {
-                        queryMapToOne(table1, key1, obj1, mp.field, db, queryMap, entityMap);
+                        queryMapToOne(table1, key1, obj1, mp.field, mp.mappingName, db, queryMap, entityMap);
                     } else if (mp.isToMany()) {
-                        queryMapToMany(table1, key1, obj1, mp.field, db, queryMap, entityMap);
+                        queryMapToMany(table1, key1, obj1, mp.field, mp.mappingName, db, queryMap, entityMap);
                     }
                 }
             }
@@ -393,12 +392,12 @@ public final class CascadeSQLiteImpl extends LiteOrm {
      * 查找N对一关系的实体
      */
     private void queryMapToOne(final EntityTable table1, Object key1, Object obj1,
-                               Field field, SQLiteDatabase db, HashMap<String, Integer> queryMap,
-                               HashMap<String, Object> entityMap)
+                               Field field, String mappingName, SQLiteDatabase db,
+                               HashMap<String, Integer> queryMap, HashMap<String, Object> entityMap)
             throws IllegalAccessException, InstantiationException {
         final EntityTable table2 = TableManager.getTable(field.getType());
         if (mTableManager.isSQLMapTableCreated(table1.name, table2.name)) {
-            SQLStatement relationSql = SQLBuilder.buildQueryRelationSql(table1, table2, key1);
+            SQLStatement relationSql = SQLBuilder.buildQueryRelationSql(table1, table2, key1, mappingName);
             final RelationKey relation = new RelationKey();
             Querier.doQuery(db, relationSql, new Querier.CursorParser() {
                 @Override
@@ -429,8 +428,8 @@ public final class CascadeSQLiteImpl extends LiteOrm {
      */
     @SuppressWarnings("unchecked")
     private void queryMapToMany(final EntityTable table1, Object key1, Object obj1,
-                                Field field, SQLiteDatabase db, HashMap<String, Integer> queryMap,
-                                final HashMap<String, Object> entityMap)
+                                Field field, String mappingName, SQLiteDatabase db,
+                                HashMap<String, Integer> queryMap, final HashMap<String, Object> entityMap)
             throws IllegalAccessException, InstantiationException {
         final Class<?> class2;
         if (Collection.class.isAssignableFrom(field.getType())) {
@@ -443,7 +442,7 @@ public final class CascadeSQLiteImpl extends LiteOrm {
         }
         final EntityTable table2 = TableManager.getTable(class2);
         if (mTableManager.isSQLMapTableCreated(table1.name, table2.name)) {
-            SQLStatement relationSql = SQLBuilder.buildQueryRelationSql(table1, table2, key1);
+            SQLStatement relationSql = SQLBuilder.buildQueryRelationSql(table1, table2, key1, mappingName);
             final ArrayList<String> key2List = new ArrayList<String>();
             Querier.doQuery(db, relationSql, new Querier.CursorParser() {
                 @Override
@@ -848,7 +847,7 @@ public final class CascadeSQLiteImpl extends LiteOrm {
                     // handle <one to one>,<many to one> relation.
                     Object obj2 = FieldUtil.get(map.field, obj1);
                     EntityTable table2 = TableManager.getTable(map.field.getType());
-                    handleMapToOne(table1, table2, key1, obj2, db, insertNew, handleMap);
+                    handleMapToOne(table1, table2, key1, obj2, map.mappingName, db, insertNew, handleMap);
                 } else if (map.isToMany()) {
                     // hanlde <one to many>,<many to many> relation.
                     Object array = FieldUtil.get(map.field, obj1);
@@ -874,7 +873,7 @@ public final class CascadeSQLiteImpl extends LiteOrm {
     /**
      * 处理N对1关系的关联实体
      */
-    private void handleMapToOne(EntityTable table1, EntityTable table2, Object key1, Object obj2,
+    private void handleMapToOne(EntityTable table1, EntityTable table2, Object key1, Object obj2, String mappingName,
                                 SQLiteDatabase db, boolean insertNew, HashMap<String, Integer> handleMap)
             throws Exception {
         if (obj2 != null) {
@@ -892,13 +891,13 @@ public final class CascadeSQLiteImpl extends LiteOrm {
 
         // 删掉旧的[映射关系]
         mTableManager.checkOrCreateMappingTable(db, mapTableName, table1.name, table2.name);
-        SQLStatement st = SQLBuilder.buildMappingDeleteSql(mapTableName, key1, table1);
+        SQLStatement st = SQLBuilder.buildMappingDeleteSql(mapTableName, key1, table1, mappingName);
         st.execDelete(db);
 
         // 存储新的[映射关系]
         if (insertNew && obj2 != null) {
             Object key2 = FieldUtil.get(table2.key.field, obj2);
-            st = SQLBuilder.buildMappingToOneSql(mapTableName, key1, key2, table1, table2);
+            st = SQLBuilder.buildMappingToOneSql(mapTableName, key1, key2, table1, table2, mappingName);
             if (st != null) {
                 st.execInsert(db);
             }

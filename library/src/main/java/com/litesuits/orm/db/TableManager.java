@@ -378,6 +378,7 @@ public final class TableManager {
             table.pmap = new LinkedHashMap<String, Property>();
             table.pmap.put(column1, null);
             table.pmap.put(column2, null);
+            table.pmap.put(MapProperty.FIELD, null);
             TableManager.putEntityTable(dbName + tableName, table);
         }
         return table;
@@ -435,7 +436,7 @@ public final class TableManager {
                     //ORM handle
                     Mapping mapping = f.getAnnotation(Mapping.class);
                     if (mapping != null) {
-                        table.addMapping(new MapProperty(p, mapping.value()));
+                        table.addMapping(new MapProperty(p, mapping.value(), mapping.field()));
                     } else {
                         table.pmap.put(p.column, p);
                     }

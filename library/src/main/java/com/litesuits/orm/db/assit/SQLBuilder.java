@@ -6,6 +6,8 @@ import com.litesuits.orm.db.annotation.*;
 import com.litesuits.orm.db.enums.AssignType;
 import com.litesuits.orm.db.model.*;
 import com.litesuits.orm.db.model.MapInfo.MapTable;
+import com.litesuits.orm.db.model.MapProperty;
+import com.litesuits.orm.db.model.Property;
 import com.litesuits.orm.db.utils.ClassUtil;
 import com.litesuits.orm.db.utils.DataUtil;
 import com.litesuits.orm.db.utils.FieldUtil;
@@ -44,6 +46,7 @@ public class SQLBuilder {
     public static final String PRIMARY_KEY = "PRIMARY KEY ";
     public static final String COMMA = ",";
     public static final String TWO_HOLDER = "(?,?)";
+    public static final String THREE_HOLDER = "(?,?,?)";
     public static final String BLANK = " ";
     public static final String NOT_NULL = "NOT NULL ";
     public static final String DEFAULT = "DEFAULT ";
@@ -771,6 +774,22 @@ public class SQLBuilder {
     }
 
     /**
+     * 构建SQL语句：删除Key1的全部映射关系数据
+     * delete from {map table} where {key1=?} and {field=?}
+     */
+    public static SQLStatement buildMappingDeleteSql(String mapTableName, Object key1,
+                                                     EntityTable table1, String mappingName)
+            throws IllegalArgumentException {
+        if (mapTableName != null) {
+            SQLStatement stmt = new SQLStatement();
+            stmt.sql = DELETE_FROM + mapTableName + WHERE + table1.name + EQUALS_HOLDER + AND + MapProperty.FIELD + EQUALS_HOLDER;
+            stmt.bindArgs = new Object[]{key1, mappingName};
+            return stmt;
+        }
+        return null;
+    }
+
+    /**
      * 构建N对多关系SQL
      * replace into {table} (col1=?,col2=?) values (v1,v2),(va,vb)...
      */
@@ -867,6 +886,28 @@ public class SQLBuilder {
     }
 
     /**
+     * 构建N对一关系存储语句
+     * insert into {table} (key1,key2,field) values (?,?,?)
+     */
+    public static SQLStatement buildMappingToOneSql(String mapTableName, Object key1, Object key2,
+                                                    EntityTable table1, EntityTable table2, String mappingNamme)
+            throws IllegalArgumentException, IllegalAccessException {
+        if (key2 != null) {
+            StringBuilder sql = new StringBuilder(128);
+            sql.append(INSERT).append(INTO).append(mapTableName)
+               .append(PARENTHESES_LEFT).append(table1.name)
+               .append(COMMA).append(table2.name)
+                    .append(COMMA).append(MapProperty.FIELD)
+               .append(PARENTHESES_RIGHT).append(VALUES).append(THREE_HOLDER);
+            SQLStatement stmt = new SQLStatement();
+            stmt.sql = sql.toString();
+            stmt.bindArgs = new Object[]{key1, key2, mappingNamme};
+            return stmt;
+        }
+        return null;
+    }
+
+    /**
      * 构建查询关系映射语句
      * select * from {map table} where {key1} in (?,?...) and {key2} in (?,?...)
      * 注意：key1List数量不能超过999
@@ -927,11 +968,12 @@ public class SQLBuilder {
     /**
      * 构建查询关系映射语句
      */
-    public static SQLStatement buildQueryRelationSql(EntityTable table1, EntityTable table2, Object key1) {
+    public static SQLStatement buildQueryRelationSql(EntityTable table1, EntityTable table2,
+                                                     Object key1, String mappingName) {
         SQLStatement sqlStatement = new SQLStatement();
         sqlStatement.sql = SELECT_ANY_FROM + TableManager.getMapTableName(table1, table2)
-                           + WHERE + table1.name + EQUALS_HOLDER;
-        sqlStatement.bindArgs = new String[]{String.valueOf(key1)};
+                           + WHERE + table1.name + EQUALS_HOLDER + AND + MapProperty.FIELD + EQUALS_HOLDER;
+        sqlStatement.bindArgs = new String[]{String.valueOf(key1), mappingName};
         return sqlStatement;
     }
 

@@ -12,15 +12,18 @@ import java.lang.reflect.Field;
 public class MapProperty extends Property {
 	private static final long serialVersionUID = 1641409866866426637L;
 	public static final String PRIMARYKEY = " PRIMARY KEY ";
+	public static final String FIELD = "field";
 	public Relation relation;
+	public String mappingName;
 
-	public MapProperty(Property p, Relation relation) {
-		this(p.column, p.field, relation);
+	public MapProperty(Property p, Relation relation, String mappingName) {
+		this(p.column, p.field, relation, mappingName);
 	}
 
-	private MapProperty(String column, Field field, Relation relation) {
+	private MapProperty(String column, Field field, Relation relation, String mappingName) {
 		super(column, field);
 		this.relation = relation;
+		this.mappingName = mappingName;
 	}
 
     public boolean isToMany(){
