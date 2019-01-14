@@ -272,6 +272,10 @@ public class LiteOrmUtil {
                 new QueryBuilder<T>(cla).columns(new String[]{field}).distinct(true));
     }
 
+    public static <T> List<T> query(QueryBuilder<T> queryBuilder){
+        return getDB().query(queryBuilder);
+    }
+
     //可以覆盖bean里面注解的冲突算法
     public static <T> long insertReplace(T t) {
         return getDB().insert(t, ConflictAlgorithm.Replace);
