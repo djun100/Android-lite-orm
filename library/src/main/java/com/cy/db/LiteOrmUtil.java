@@ -23,7 +23,7 @@ public class LiteOrmUtil {
         sDatabaseConfig = databaseConfig;
     }
 
-    private static LiteOrm getDB() {
+    protected static LiteOrm getDB() {
         if (mLiteOrm == null) {
             synchronized (LiteOrmUtil.class) {
                 if (mLiteOrm == null) {
