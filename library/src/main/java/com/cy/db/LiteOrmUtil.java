@@ -338,9 +338,17 @@ public class LiteOrmUtil {
 //        }
 //    }
 
+    private static volatile boolean sIsDeletingDb =false;
+    /**
+     * fixme 注意多线程使用mLiteOrm导致获取到null的情况，除非保证删库后不再执行查询操作，
+     * 否则应等该函数完全执行完毕后再使用数据库对象
+     */
     public static void deleteDB(){
+        sIsDeletingDb =true;
         getDB().deleteDatabase();
         mLiteOrm=null;
+        mLiteOrm=getDB();
+        sIsDeletingDb =false;
     }
 
     public static void close(){
