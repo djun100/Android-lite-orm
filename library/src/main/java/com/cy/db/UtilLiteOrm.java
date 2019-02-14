@@ -15,7 +15,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-public class LiteOrmUtil {
+public class UtilLiteOrm {
     private volatile static LiteOrm mLiteOrm;
     private static DataBaseConfig sDatabaseConfig;
 
@@ -25,7 +25,7 @@ public class LiteOrmUtil {
 
     protected static LiteOrm getDB() {
         if (mLiteOrm == null) {
-            synchronized (LiteOrmUtil.class) {
+            synchronized (UtilLiteOrm.class) {
                 if (mLiteOrm == null) {
                     // 使用级联操作
                     if (sDatabaseConfig == null) {
@@ -346,5 +346,9 @@ public class LiteOrmUtil {
     public static void close(){
         getDB().close();
         mLiteOrm=null;
+    }
+
+    public static String getDbPathName(){
+        return getDB().getWritableDatabase().getPath();
     }
 }
